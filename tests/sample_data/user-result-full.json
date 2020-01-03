@@ -1,0 +1,67 @@
+{
+    "DisplayName": "Test User",
+    "EduPersonAffiliations": [
+        "member",
+        "alum",
+        "staff",
+        "employee"
+    ],
+    "IsTestEntity": true,
+    "PersonAffiliations": {
+        "EmployeePersonAffiliation": {
+            "EmployeeAffiliationState": "current",
+            "EmployeeID": "123456789",
+            "EmployeeWhitePages": {
+                "Addresses": [],
+                "EmailAddresses": [
+                    "testuser1@uw.edu"
+                ],
+                "Faxes": [],
+                "Mobiles": [],
+                "Name": "User, Test",
+                "Pagers": [],
+                "Phones": [
+                    "+1 206 111-2222"
+                ],
+                "Positions": [
+                    {
+                        "EWPDept": "CAS: Psychology: Admin",
+                        "EWPTitle": "Senior Test User",
+                        "Primary": true
+                    }
+                ],
+                "PublishInDirectory": true,
+                "TouchDials": [],
+                "VoiceMails": []
+            },
+            "HomeDepartment": "CAS: Psychology: Admin",
+            "MailStop": "351525"
+        },
+        "StudentPersonAffiliation": {
+            "StudentAffiliationState": "prior",
+            "StudentNumber": "1234567",
+            "StudentSystemKey": "12345679",
+            "StudentWhitePages": {
+                "Class": null,
+                "Departments": [],
+                "Email": null,
+                "Name": null,
+                "Phone": null,
+                "PublishInDirectory": false
+            }
+        }
+    },
+    "PreferredFirstName": "Test",
+    "PreferredMiddleName": null,
+    "PreferredSurname": "User",
+    "PriorUWNetIDs": [],
+    "PriorUWRegIDs": [],
+    "RegisteredFirstMiddleName": "Test W",
+    "RegisteredName": "Test W User",
+    "RegisteredSurname": "User",
+    "RepositoryTimeStamp": "6/17/2019 10:03:29 AM",
+    "UIDNumber": "123456",
+    "UWNetID": "testuser1",
+    "UWRegID": "ADA12DA10F7649B2A8861B14633F0A0A",
+    "WhitepagesPublish": true
+}
