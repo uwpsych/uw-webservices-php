@@ -51,7 +51,7 @@ class AbstractApi
 
     protected function get(string $path = '/', array $params = [], array $options = [])
     {
-        $response = $this->client->httpClient->get($path);
+        $response = $this->client->getHttpClient()->get($path);
 
         if ($response->getStatusCode() != 200) {
             throw new DataFailureException($path, $response->getStatusCode(), $response->getReasonPhrase());

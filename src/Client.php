@@ -17,8 +17,6 @@ use UwPsych\UwWebservices\Exception\InvalidArgumentException;
  * @method Api\Person findByStudentNumber()
  * @method Api\Person findByName()
  *
- * @author Shawn Heide <psych@uw.edu>
- *
  * Website: http://github.com/uwpsych/uw-webservices-php
  */
 class Client
@@ -76,5 +74,13 @@ class Client
         }
 
         return $api;
+    }
+
+    /**
+     * @return HttpMethodsClient
+     */
+    public function getHttpClient()
+    {
+        return $this->httpClient;
     }
 }
