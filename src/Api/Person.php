@@ -72,7 +72,7 @@ class Person extends AbstractApi
         $regids = $this->validateIDs($regids, 'regid');
         $params['uwregid'] = $regids;
 
-        return $people = $this->findBy($params);
+        return $this->findBy($params);
     }
 
     /**
@@ -89,7 +89,7 @@ class Person extends AbstractApi
         $netids = $this->validateIDs($netids, 'netid');
         $params['uwnetid'] = $netids;
 
-        return $people = $this->findBy($params);
+        return $this->findBy($params);
     }
 
     /**
@@ -106,7 +106,7 @@ class Person extends AbstractApi
         $employee_ids = $this->validateIDs($employee_ids, 'employee_id');
         $params['employee_id'] = $employee_ids;
 
-        return $people = $this->findBy($params);
+        return $this->findBy($params);
     }
 
     /**
@@ -123,7 +123,7 @@ class Person extends AbstractApi
         $student_numbers = $this->validateIDs($student_numbers, 'student_number');
         $params['student_number'] = $student_numbers;
 
-        return $people = $this->findBy($params);
+        return $this->findBy($params);
     }
 
     /**
@@ -153,7 +153,7 @@ class Person extends AbstractApi
             }
         }
 
-        return $people = $this->findBy($params);
+        return $this->findBy($params);
     }
 
     protected function findBy($params)

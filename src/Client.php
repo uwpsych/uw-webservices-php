@@ -16,16 +16,19 @@ use UwPsych\UwWebservices\Exception\InvalidArgumentException;
  * @method Api\Person findByEmployeeID()
  * @method Api\Person findByStudentNumber()
  * @method Api\Person findByName()
+ * @method Api\Entity getByRegID()
+ * @method Api\Entity getByNetID()
+ * @method Api\Entity findByName()
  *
  * Website: http://github.com/uwpsych/uw-webservices-php
  */
 class Client
 {
     /** @var null|string */
-    private $_cert = null;
+    private $cert = null;
 
     /** @var null|string */
-    private $_ssl_key = null;
+    private $ssl_key = null;
 
     /** @var GuzzleHttp\Client */
     private $httpClient;
@@ -38,8 +41,8 @@ class Client
      */
     public function __construct(string $cert, string $ssl_key, $httpClient = null)
     {
-        $this->_cert = $cert;
-        $this->_ssl_key = $ssl_key;
+        $this->cert = $cert;
+        $this->ssl_key = $ssl_key;
         $this->httpClient =
             $httpClient ??
             new GuzzleClient([
