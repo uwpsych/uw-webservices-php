@@ -57,6 +57,11 @@ class AbstractApi
     {
         $response = $this->client->getHttpClient()->get($path);
 
+        // return an empty array if nothing was found
+        if ($response->getStatusCode() === 404) {
+            return [];
+        }
+
         if ($response->getStatusCode() != 200) {
             throw new DataFailureException($path, $response->getStatusCode(), $response->getReasonPhrase());
         }
