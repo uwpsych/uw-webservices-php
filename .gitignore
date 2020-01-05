@@ -2,3 +2,6 @@ composer.lock
 phpunit.xml
 vendor
 .phpunit.result.cache
+package.json
+yarn.lock
+node_modules
