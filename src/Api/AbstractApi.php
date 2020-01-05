@@ -30,7 +30,11 @@ class AbstractApi
     {
         $this->client = $client;
 
-        $_options = ['format' => '.json'];
+        $_options = [
+            'format' => '.json',
+            'full' => true,
+            'version' => 'v2'
+        ];
         $this->options = array_merge($_options, $options);
 
         $_defaultParams = [
@@ -142,5 +146,26 @@ class AbstractApi
         }
 
         return 1 === preg_match($regex, strval($id));
+    }
+
+    protected function buildPath($fragment = '', $params = [])
+    {
+        if (empty($params)) {
+            $query_component = '';
+        } else {
+            // merge the default params
+            $params = array_merge($this->defaultParams, $params);
+
+            // filter null values
+            $params = array_filter($params);
+
+            // build the query string
+            $query_component = '?' . http_build_query($params);
+        }
+
+        $version = $this->options['version'];
+        $format = $this->options['format'];
+
+        return '/identity/' . $version . '/' . $fragment . $format . $query_component;
     }
 }
