@@ -166,6 +166,7 @@ class AbstractApi
         $version = $this->options['version'];
         $format = $this->options['format'];
 
+        // TODO: need to change so that other APIs can be used other than 'identity'
         return '/identity/' . $version . '/' . $fragment . $format . $query_component;
     }
 }
