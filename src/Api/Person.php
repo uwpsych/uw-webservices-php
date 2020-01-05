@@ -49,8 +49,11 @@ class Person extends AbstractApi
      */
     protected function getByID($id)
     {
-        $format = $this->options['format'];
-        $path = "/identity/v2/person/{$id}{$format}";
+        $fragment = 'person/' . $id;
+        // add full to fragment if specified
+        $fragment .= $this->options['full'] ? '/full' : '';
+
+        $path = $this->buildPath($fragment);
 
         return $this->get($path);
     }
@@ -155,16 +158,6 @@ class Person extends AbstractApi
 
     protected function findBy($params)
     {
-        // add the data format
-        $format = $this->options['format'];
-        $path = "/identity/v2/person{$format}";
-
-        // merge the default params
-        $params = array_merge($this->defaultParams, $params);
-
-        // filter null values
-        $params = array_filter($params);
-
         // split array values for id fields
         $id_fields = ['uwregid', 'uwnetid', 'employee_id', 'student_number', 'student_system_key', 'development_id'];
         foreach ($params as $key => $value) {
@@ -173,8 +166,8 @@ class Person extends AbstractApi
             }
         }
 
-        // build the query string
-        $path .= '?' . http_build_query($params);
+        $fragment = "person";
+        $path = $this->buildPath($fragment, $params);
 
         return $this->get($path);
     }
