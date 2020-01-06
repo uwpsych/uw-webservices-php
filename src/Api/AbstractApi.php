@@ -104,11 +104,11 @@ class AbstractApi
     protected function validateID($id, $type): string
     {
         $exception_lookup = [
-            'netid' => 'InvalidNetIDException',
-            'regid' => 'InvalidRegIDException',
-            'employee_id' => 'InvalidEmployeeIDException',
-            'student_number' => 'InvalidStudentNumberException',
-            'prox_rfid' => 'InvalidProxRFIDException'
+            'netid' => 'UwPsych\UwWebservices\Exception\InvalidNetIDException',
+            'regid' => 'UwPsych\UwWebservices\Exception\InvalidRegIDException',
+            'employee_id' => 'UwPsych\UwWebservices\Exception\InvalidEmployeeIDException',
+            'student_number' => 'UwPsych\UwWebservices\Exception\InvalidStudentNumberException',
+            'prox_rfid' => 'UwPsych\UwWebservices\Exception\InvalidProxRFIDException'
         ];
 
         $regex_lookup = [
