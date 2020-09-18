@@ -141,8 +141,8 @@ class Person extends AbstractApi
     public function findByName($names, $affiliations = [], $params = [])
     {
         // TODO: consider validating names
-        $params['first_name'] = isset($names['first_name']) ? $names['first_name'] : null;
-        $params['last_name'] = isset($names['last_name']) ? $names['last_name'] : null;
+        $params['first_name'] = $names['first_name'] ?? null;
+        $params['last_name'] = $names['last_name'] ?? null;
 
         $params = $this->processAffiliations($affiliations, $params);
 
@@ -163,8 +163,8 @@ class Person extends AbstractApi
      */
     public function findByDepartment($department, $affiliations = [], $params = [])
     {
-        $params['department'] = isset($department['department']) ? $department['department'] : null;
-        $params['home_department'] = isset($department['home_department']) ? $department['home_department'] : null;
+        $params['department'] = $department['department'] ?? null;
+        $params['home_department'] = $department['home_department'] ?? null;
 
         $params = $this->processAffiliations($affiliations, $params);
 
