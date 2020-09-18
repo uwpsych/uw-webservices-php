@@ -164,7 +164,7 @@ class Person extends AbstractApi
     public function findByDepartment($department, $affiliations = [], $params = [])
     {
         $params['department'] = $department['department'] ?? null;
-        $params['home_department'] = $department['home_department'] ?? null;
+        $params['home_dept'] = $department['home_department'] ?? null;
 
         $params = $this->processAffiliations($affiliations, $params);
 
