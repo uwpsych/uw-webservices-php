@@ -149,6 +149,28 @@ class Person extends AbstractApi
         return $this->findBy($params);
     }
 
+    /**
+     * Search by Department, Home Department, or both.
+     * Wildcards can be specified with an asterisk.
+     * You can also filter by UW affiliations.
+     *
+     * @link https://wiki.cac.washington.edu/pages/viewpage.action?spaceKey=pws&title=Person+Search+v2
+     *
+     * @param array $department Array with keys of 'department' and/or 'home_dept' used to search for users.
+     * @param array $affiliations List of UW affiliations to filter on. Can be any of student, staff, faculty, employee, member, alum, affiliate.
+     *
+     * @return array List of people found.
+     */
+    public function findByDepartment($department, $affiliations = [], $params = [])
+    {
+        $params['department'] = isset($department['department']) ? $department['department'] : null;
+        $params['home_department'] = isset($department['home_department']) ? $department['home_department'] : null;
+
+        $params = $this->processAffiliations($affiliations, $params);
+
+        return $this->findBy($params);
+    }
+
     protected function findBy($params)
     {
         // split array values for id fields
