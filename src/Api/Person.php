@@ -144,14 +144,7 @@ class Person extends AbstractApi
         $params['first_name'] = isset($names['first_name']) ? $names['first_name'] : null;
         $params['last_name'] = isset($names['last_name']) ? $names['last_name'] : null;
 
-        // Add affiliations to params
-        $valid_affiliations = ['student', 'staff', 'faculty', 'employee', 'member', 'alum', 'affiliate'];
-        foreach ($affiliations as $affiliation) {
-            if (in_array($affiliation, $valid_affiliations)) {
-                $key = "edupersonaffiliation_{$affiliation}";
-                $params[$key] = 'true';
-            }
-        }
+        $params = $this->processAffiliations($affiliations, $params);
 
         return $this->findBy($params);
     }
@@ -170,5 +163,19 @@ class Person extends AbstractApi
         $path = $this->buildPath($fragment, $params);
 
         return $this->get($path);
+    }
+
+    protected function processAffiliations($affiliations, $params)
+    {
+        // Add affiliations to params
+        $valid_affiliations = ['student', 'staff', 'faculty', 'employee', 'member', 'alum', 'affiliate'];
+        foreach ($affiliations as $affiliation) {
+            if (in_array($affiliation, $valid_affiliations)) {
+                $key = "edupersonaffiliation_{$affiliation}";
+                $params[$key] = 'true';
+            }
+        }
+
+        return $params;
     }
 }
