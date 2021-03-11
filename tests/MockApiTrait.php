@@ -1,21 +1,13 @@
 <?php
 
-namespace UwPsych\UwWebservices\Tests\Api;
+namespace UwPsych\UwWebservices\Tests;
 
 use GuzzleHttp\Client as GuzzleClient;
 use UwPsych\UwWebservices\Client;
 
-abstract class TestCase extends \PHPUnit\Framework\TestCase
+trait MockApiTrait
 {
-    /**
-     * @return string
-     */
-    abstract protected function getApiClass();
-
-    /**
-     * @return \PHPUnit\Framework\MockObject\MockObject
-     */
-    protected function getApiMock()
+    public function getApiMock($class)
     {
         $httpClient = $this->getMockBuilder(GuzzleClient::class)
             ->setMethods(['get', 'getStatusCode'])
@@ -23,16 +15,16 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
 
         $client = new Client('', '', $httpClient);
 
-        return $this->getMockBuilder($this->getApiClass())
+        return $this->getMockBuilder($class)
             ->setMethods(['get'])
             ->setConstructorArgs([$client])
             ->getMock();
     }
 
-    protected function loadJson($filename)
+    public function loadJson($filename)
     {
         $basepath = dirname(__FILE__);
-        $string = file_get_contents("{$basepath}/sample_data/{$filename}");
+        $string = file_get_contents("{$basepath}/Unit/sample_data/{$filename}");
         if ($string === false) {
             // deal with error...
         }
