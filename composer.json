@@ -1,36 +1,41 @@
 {
-    "name": "uwpsych/uw-webservices-php",
-    "description": "UW web services PHP client",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Shawn Heide",
-            "email": "psych@uw.edu",
-            "homepage": "https://github.com/shawnheide"
-        }
-    ],
-    "homepage": "https://github.com/uwpsych/uw-webservices-php",
-    "keywords": [
-        "uw web services",
-        "person web service"
-    ],
-    "require": {
-        "php": "^7.4|^8.0",
-        "psr/http-message": "^1.0",
-        "guzzlehttp/guzzle": "^6.5|^7.0"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^8.0|^9.0",
-        "pestphp/pest": "^1.0"
-    },
-    "autoload": {
-        "psr-4": {
-            "UwPsych\\UwWebservices\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "UwPsych\\UwWebservices\\Tests\\": "tests/"
-        }
+  "name": "uwpsych/uw-webservices-php",
+  "description": "UW web services PHP client",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Shawn Heide",
+      "email": "psych@uw.edu",
+      "homepage": "https://github.com/shawnheide"
     }
+  ],
+  "homepage": "https://github.com/uwpsych/uw-webservices-php",
+  "keywords": [
+    "uw web services",
+    "person web service"
+  ],
+  "require": {
+    "php": "^7.4|^8.0",
+    "psr/http-message": "^1.0",
+    "guzzlehttp/guzzle": "^6.5|^7.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9.0|^10.0",
+    "pestphp/pest": "^1.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "UwPsych\\UwWebservices\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "UwPsych\\UwWebservices\\Tests\\": "tests/"
+    }
+  },
+  "config": {
+    "allow-plugins": {
+      "pestphp/pest-plugin": true
+    }
+  }
 }
