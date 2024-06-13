@@ -10,13 +10,13 @@ trait MockApiTrait
     public function getApiMock($class)
     {
         $httpClient = $this->getMockBuilder(GuzzleClient::class)
-            ->setMethods(['get', 'getStatusCode'])
+            ->onlyMethods(['get'])
             ->getMock();
 
-        $client = new Client('', '', $httpClient);
+        $client = new Client('', '', '', $httpClient);
 
         return $this->getMockBuilder($class)
-            ->setMethods(['get'])
+            ->onlyMethods(['get'])
             ->setConstructorArgs([$client])
             ->getMock();
     }

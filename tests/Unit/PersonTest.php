@@ -12,7 +12,7 @@ test('get_person_by_reg_id', function () {
     $this->api
         ->expects($this->once())
         ->method('get')
-        ->with('/identity/v2/person/ADA12DA10F7649B2A8861B14633F0A0A/full.json')
+        ->with('/v2/person/ADA12DA10F7649B2A8861B14633F0A0A/full.json')
         ->will($this->returnValue($expectedArray));
 
     $this->assertEquals($expectedArray, $this->api->getByRegID('ADA12DA10F7649B2A8861B14633F0A0A'));
@@ -24,7 +24,7 @@ test('get_person_by_uw_net_id', function () {
     $this->api
         ->expects($this->once())
         ->method('get')
-        ->with('/identity/v2/person/testuser1/full.json')
+        ->with('/v2/person/testuser1/full.json')
         ->will($this->returnValue($expectedArray));
 
     $this->assertEquals($expectedArray, $this->api->getByNetID('testuser1'));
@@ -36,7 +36,7 @@ test('find_person_by_first_name', function () {
     $this->api
         ->expects($this->once())
         ->method('get')
-        ->with('/identity/v2/person.json?page_size=10&page_start=1&first_name=Test+W')
+        ->with('/v2/person.json?page_size=10&page_start=1&first_name=Test+W')
         ->will($this->returnValue($expectedArray));
 
     $this->assertEquals($expectedArray, $this->api->findByName(['first_name' => 'Test W']));
@@ -48,7 +48,7 @@ test('find_person_by_last_name', function () {
     $this->api
         ->expects($this->once())
         ->method('get')
-        ->with('/identity/v2/person.json?page_size=10&page_start=1&last_name=User')
+        ->with('/v2/person.json?page_size=10&page_start=1&last_name=User')
         ->will($this->returnValue($expectedArray));
 
     $this->assertEquals($expectedArray, $this->api->findByName(['last_name' => 'User']));
@@ -60,7 +60,7 @@ test('find_person_by_first_and_last_name', function () {
     $this->api
         ->expects($this->once())
         ->method('get')
-        ->with('/identity/v2/person.json?page_size=10&page_start=1&first_name=Test+W&last_name=User')
+        ->with('/v2/person.json?page_size=10&page_start=1&first_name=Test+W&last_name=User')
         ->will($this->returnValue($expectedArray));
 
     $this->assertEquals($expectedArray, $this->api->findByName(['first_name' => 'Test W', 'last_name' => 'User']));
@@ -72,7 +72,7 @@ test('find_person_by_first_and_last_name_with_wildcard', function () {
     $this->api
         ->expects($this->once())
         ->method('get')
-        ->with('/identity/v2/person.json?page_size=10&page_start=1&first_name=Test%2A&last_name=User')
+        ->with('/v2/person.json?page_size=10&page_start=1&first_name=Test%2A&last_name=User')
         ->will($this->returnValue($expectedArray));
 
     $this->assertEquals($expectedArray, $this->api->findByName(['first_name' => 'Test*', 'last_name' => 'User']));
@@ -84,7 +84,7 @@ test('find_person_by_uw_net_id_string', function () {
     $this->api
         ->expects($this->once())
         ->method('get')
-        ->with('/identity/v2/person.json?page_size=10&page_start=1&uwnetid=testuser1')
+        ->with('/v2/person.json?page_size=10&page_start=1&uwnetid=testuser1')
         ->will($this->returnValue($expectedArray));
 
     $this->assertEquals($expectedArray, $this->api->findByNetID('testuser1'));
@@ -96,7 +96,7 @@ test('find_person_by_uw_reg_id', function () {
     $this->api
         ->expects($this->once())
         ->method('get')
-        ->with('/identity/v2/person.json?page_size=10&page_start=1&uwregid=ADA12DA10F7649B2A8861B14633F0A0A')
+        ->with('/v2/person.json?page_size=10&page_start=1&uwregid=ADA12DA10F7649B2A8861B14633F0A0A')
         ->will($this->returnValue($expectedArray));
 
     $this->assertEquals($expectedArray, $this->api->findByRegID('ADA12DA10F7649B2A8861B14633F0A0A'));
@@ -108,7 +108,7 @@ test('find_person_by_uw_employee_id', function () {
     $this->api
         ->expects($this->once())
         ->method('get')
-        ->with('/identity/v2/person.json?page_size=10&page_start=1&employee_id=123456789')
+        ->with('/v2/person.json?page_size=10&page_start=1&employee_id=123456789')
         ->will($this->returnValue($expectedArray));
 
     $this->assertEquals($expectedArray, $this->api->findByEmployeeID('123456789'));
@@ -120,7 +120,7 @@ test('find_person_by_uw_student_number', function () {
     $this->api
         ->expects($this->once())
         ->method('get')
-        ->with('/identity/v2/person.json?page_size=10&page_start=1&student_number=1234567')
+        ->with('/v2/person.json?page_size=10&page_start=1&student_number=1234567')
         ->will($this->returnValue($expectedArray));
 
     $this->assertEquals($expectedArray, $this->api->findByStudentNumber('1234567'));
@@ -132,7 +132,7 @@ test('find_person_by_uw_net_id_array', function () {
     $this->api
         ->expects($this->once())
         ->method('get')
-        ->with('/identity/v2/person.json?page_size=10&page_start=1&uwnetid=testuser1')
+        ->with('/v2/person.json?page_size=10&page_start=1&uwnetid=testuser1')
         ->will($this->returnValue($expectedArray));
 
     $this->assertEquals($expectedArray, $this->api->findByNetID(['testuser1']));
@@ -144,7 +144,7 @@ test('find_person_by_multiple_ids', function () {
     $this->api
         ->expects($this->once())
         ->method('get')
-        ->with('/identity/v2/person.json?page_size=10&page_start=1&uwnetid=testuser1%2Ctestuser2')
+        ->with('/v2/person.json?page_size=10&page_start=1&uwnetid=testuser1%2Ctestuser2')
         ->will($this->returnValue($expectedArray));
 
     $this->assertEquals($expectedArray, $this->api->findByNetID(['testuser1', 'testuser2']));
