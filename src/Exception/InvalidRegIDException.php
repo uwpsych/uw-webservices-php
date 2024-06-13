@@ -8,6 +8,6 @@ class InvalidRegIDException extends Exception
 {
     public function __construct($regid)
     {
-        parent::__construct(sprintf('The given regid was invalid: ("%s")!', $regid));
+        parent::__construct("The given regid was invalid: {$regid}");
     }
 }

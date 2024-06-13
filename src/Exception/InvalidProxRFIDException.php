@@ -8,6 +8,6 @@ class InvalidProxRFIDException extends Exception
 {
     public function __construct($proxRFID)
     {
-        parent::__construct(sprintf('The given prox RFID was invalid: ("%s")!', $proxRFID));
+        parent::__construct("The given prox RFID was invalid: {$proxRFID}");
     }
 }

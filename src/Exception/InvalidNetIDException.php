@@ -8,6 +8,6 @@ class InvalidNetIDException extends Exception
 {
     public function __construct($netid)
     {
-        parent::__construct(sprintf('The given netid was invalid: ("%s")!', $netid));
+        parent::__construct("The given netid was invalid: {$netid}");
     }
 }
