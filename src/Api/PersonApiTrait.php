@@ -7,6 +7,7 @@ use UwPsych\UwWebservices\Exception\InvalidNetIDException;
 use UwPsych\UwWebservices\Exception\InvalidEmployeeIDException;
 use UwPsych\UwWebservices\Exception\InvalidStudentNumberException;
 use UwPsych\UwWebservices\Exception\InvalidArgumentException;
+use UwPsych\UwWebservices\Exception\InvalidProxRFIDException;
 
 trait PersonApiTrait
 {
