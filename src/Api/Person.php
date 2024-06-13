@@ -10,12 +10,8 @@ class Person extends AbstractApi
      * Get the person by UW RegID.
      *
      * @link https://wiki.cac.washington.edu/display/pws/Person+v2
-     *
-     * @param string $regid UW RegID.
-     *
-     * @return array information about the person.
      */
-    public function getByRegID($regid)
+    public function getByRegID(string $regid): array
     {
         $regid = $this->validateID($regid, 'regid');
 
@@ -26,12 +22,8 @@ class Person extends AbstractApi
      * Get the person by UW NetID.
      *
      * @link https://wiki.cac.washington.edu/display/pws/Person+v2
-     *
-     * @param string $netid UW NetID.
-     *
-     * @return array Information about the person.
      */
-    public function getByNetID($netid)
+    public function getByNetID(string $netid): array
     {
         $netid = $this->validateID($netid, 'netid');
 
@@ -44,10 +36,8 @@ class Person extends AbstractApi
      * @link https://wiki.cac.washington.edu/display/pws/Person+v2
      *
      * @param string $id UW RegID or UW NetID.
-     *
-     * @return array Information about the person.
      */
-    protected function getByID($id)
+    protected function getByID(string $id): array
     {
         $fragment = 'person/' . $id;
         // add full to fragment if specified
@@ -64,13 +54,10 @@ class Person extends AbstractApi
      * @link https://wiki.cac.washington.edu/pages/viewpage.action?spaceKey=pws&title=Person+Search+v2
      *
      * @param string|array $regids Either a single UW Regid as a string or an array of Regids.
-     *
-     * @return array List of people found.
      */
-    public function findByRegid($regids, $params = [])
+    public function findByRegid(string|array $regids, array $params = []): array
     {
-        $regids = $this->validateIDs($regids, 'regid');
-        $params['uwregid'] = $regids;
+        $params['uwregid'] = $this->validateIDs($regids, 'regid');
 
         return $this->findBy($params);
     }
@@ -81,13 +68,10 @@ class Person extends AbstractApi
      * @link https://wiki.cac.washington.edu/pages/viewpage.action?spaceKey=pws&title=Person+Search+v2
      *
      * @param string|array $netids Either a single UW NetID as a string or an array of NetIDs.
-     *
-     * @return array List of people found.
      */
-    public function findByNetID($netids, $params = [])
+    public function findByNetID(string|array $netids, array $params = []): array
     {
-        $netids = $this->validateIDs($netids, 'netid');
-        $params['uwnetid'] = $netids;
+        $params['uwnetid'] = $this->validateIDs($netids, 'netid');
 
         return $this->findBy($params);
     }
@@ -97,14 +81,11 @@ class Person extends AbstractApi
      *
      * @link https://wiki.cac.washington.edu/pages/viewpage.action?spaceKey=pws&title=Person+Search+v2
      *
-     * @param string|array $employee_ids either a single UW Employee ID as a string or an array of Employee IDs.
-     *
-     * @return array List of people found.
+     * @param string|array $employeeIds either a single UW Employee ID as a string or an array of Employee IDs.
      */
-    public function findByEmployeeID($employee_ids, $params = [])
+    public function findByEmployeeID(string|array $employeeIds, array $params = []): array
     {
-        $employee_ids = $this->validateIDs($employee_ids, 'employee_id');
-        $params['employee_id'] = $employee_ids;
+        $params['employee_id'] = $this->validateIDs($employeeIds, 'employee_id');
 
         return $this->findBy($params);
     }
@@ -114,14 +95,11 @@ class Person extends AbstractApi
      *
      * @link https://wiki.cac.washington.edu/pages/viewpage.action?spaceKey=pws&title=Person+Search+v2
      *
-     * @param string|array $student_numbers either a single UW Student Number as a string or an array of Student Numbers.
-     *
-     * @return array List of people found.
+     * @param string|array $studentNumbers either a single UW Student Number as a string or an array of Student Numbers.
      */
-    public function findByStudentNumber($student_numbers, $params = [])
+    public function findByStudentNumber(string|array $studentNumbers, array $params = []): array
     {
-        $student_numbers = $this->validateIDs($student_numbers, 'student_number');
-        $params['student_number'] = $student_numbers;
+        $params['student_number'] = $this->validateIDs($studentNumbers, 'student_number');
 
         return $this->findBy($params);
     }
@@ -135,10 +113,8 @@ class Person extends AbstractApi
      *
      * @param array $names List of first_name, last_name, or both.
      * @param array $affiliations List of UW affiliations to filter on. Can be any of student, staff, faculty, employee, member, alum, affiliate.
-     *
-     * @return array List of people found.
      */
-    public function findByName($names, $affiliations = [], $params = [])
+    public function findByName(array $names, array $affiliations = [], array $params = []): array
     {
         // TODO: consider validating names
         $params['first_name'] = $names['first_name'] ?? null;
@@ -158,10 +134,8 @@ class Person extends AbstractApi
      *
      * @param array $department Array with keys of 'department' and/or 'home_dept' used to search for users.
      * @param array $affiliations List of UW affiliations to filter on. Can be any of student, staff, faculty, employee, member, alum, affiliate.
-     *
-     * @return array List of people found.
      */
-    public function findByDepartment($department, $affiliations = [], $params = [])
+    public function findByDepartment(array $department, array $affiliations = [], array $params = []): array
     {
         $params['department'] = $department['department'] ?? null;
         $params['home_dept'] = $department['home_department'] ?? null;
@@ -171,12 +145,12 @@ class Person extends AbstractApi
         return $this->findBy($params);
     }
 
-    protected function findBy($params)
+    protected function findBy(array $params): mixed
     {
         // split array values for id fields
-        $id_fields = ['uwregid', 'uwnetid', 'employee_id', 'student_number', 'student_system_key', 'development_id'];
+        $idFields = ['uwregid', 'uwnetid', 'employee_id', 'student_number', 'student_system_key', 'development_id'];
         foreach ($params as $key => $value) {
-            if (in_array($key, $id_fields)) {
+            if (in_array($key, $idFields)) {
                 $params[$key] = is_array($value) ? implode(',', $value) : $value;
             }
         }
@@ -187,12 +161,12 @@ class Person extends AbstractApi
         return $this->get($path);
     }
 
-    protected function processAffiliations($affiliations, $params)
+    protected function processAffiliations(array $affiliations, array $params): array
     {
         // Add affiliations to params
-        $valid_affiliations = ['student', 'staff', 'faculty', 'employee', 'member', 'alum', 'affiliate'];
+        $validAffiliations = ['student', 'staff', 'faculty', 'employee', 'member', 'alum', 'affiliate'];
         foreach ($affiliations as $affiliation) {
-            if (in_array($affiliation, $valid_affiliations)) {
+            if (in_array($affiliation, $validAffiliations)) {
                 $key = "edupersonaffiliation_{$affiliation}";
                 $params[$key] = 'true';
             }

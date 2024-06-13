@@ -6,8 +6,8 @@ use Exception;
 
 class InvalidStudentNumberException extends Exception
 {
-    public function __construct($student_number)
+    public function __construct($studentNumber)
     {
-        parent::__construct("The given student_number was invalid: '{$student_number}'");
+        parent::__construct("The given student_number was invalid: '{$studentNumber}'");
     }
 }

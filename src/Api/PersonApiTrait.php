@@ -13,13 +13,8 @@ trait PersonApiTrait
 {
     /**
      * Set the API options and default query parameters.
-     * 
-     * @param $options
-     * @param $defaultParams
-     * 
-     * @return void
      */
-    public function setup($options, $defaultParams)
+    public function setup(array $options, array $defaultParams): void
     {
         $_options = [
             'format' => '.json',
@@ -50,8 +45,6 @@ trait PersonApiTrait
      *
      * @param array $ids List of UW IDs.
      * @param string $type The type of ID. Can be any of netid, regid, employee_id, student_number, or prox_rfid.
-     *
-     * @return array
      */
     protected function validateIDs($ids, $type): array
     {
@@ -62,8 +55,7 @@ trait PersonApiTrait
         }
 
         foreach ($ids as $idx => $id) {
-            $id = $this->validateID($id, $type);
-            $ids[$idx] = $id;
+            $ids[$idx] = $this->validateID($id, $type);
         }
 
         return $ids;
@@ -74,12 +66,10 @@ trait PersonApiTrait
      *
      * @param string $id UW ID.
      * @param string $type The type of ID. Can be any of netid, regid, employee_id, student_number, or prox_rfid.
-     *
-     * @return string
      */
-    protected function validateID($id, $type): string
+    protected function validateID(string $id, string $type): string
     {
-        $exception_lookup = [
+        $exceptionLookup = [
             'netid' => InvalidNetIDException::class,
             'regid' => InvalidRegIDException::class,
             'employee_id' => InvalidEmployeeIDException::class,
@@ -87,7 +77,7 @@ trait PersonApiTrait
             'prox_rfid' => InvalidProxRFIDException::class
         ];
 
-        $regex_lookup = [
+        $regexLookup = [
             'netid' => '/^[a-z][a-z0-9\-\_\.]{1,127}$/i',
             'regid' => '/^[A-F0-9]{32}$/i',
             'employee_id' => '/^\d{9}$/',
@@ -95,8 +85,8 @@ trait PersonApiTrait
             'prox_rfid' => '/^\d{16}$/'
         ];
 
-        $regex = $regex_lookup[$type];
-        $exception = $exception_lookup[$type];
+        $regex = $regexLookup[$type];
+        $exception = $exceptionLookup[$type];
 
         // transform netid and regid strings
         if ($type == 'netid') {
@@ -105,7 +95,7 @@ trait PersonApiTrait
             $id = strtoupper($id);
         }
 
-        if (!$this->isIDValid($id, $regex)) {
+        if (! $this->isIDValid($id, $regex)) {
             throw new $exception($id);
         }
 
@@ -114,13 +104,8 @@ trait PersonApiTrait
 
     /**
      * Helper function to validate UW IDs
-     *
-     * @param string $id
-     * @param string $regex
-     *
-     * @return bool
      */
-    protected function isIDValid($id, $regex): bool
+    protected function isIDValid(string $id, string $regex): bool
     {
         if (empty($id)) {
             return false;

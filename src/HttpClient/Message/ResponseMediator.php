@@ -6,12 +6,7 @@ use Psr\Http\Message\ResponseInterface;
 
 class ResponseMediator
 {
-    /**
-     * @param ResponseInterface $response
-     *
-     * @return array|string
-     */
-    public static function getContent(ResponseInterface $response)
+    public static function getContent(ResponseInterface $response): mixed
     {
         $body = $response->getBody()->__toString();
         if (strpos($response->getHeaderLine('Content-Type'), 'application/json') === 0) {

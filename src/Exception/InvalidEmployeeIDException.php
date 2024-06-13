@@ -6,8 +6,8 @@ use Exception;
 
 class InvalidEmployeeIDException extends Exception
 {
-    public function __construct($employee_id)
+    public function __construct($employeeId)
     {
-        parent::__construct("The given employee_id was invalid: {$employee_id}");
+        parent::__construct("The given employee_id was invalid: {$employeeId}");
     }
 }

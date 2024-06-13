@@ -10,12 +10,8 @@ class Entity extends AbstractApi
      * Get the entity by UW RegID.
      *
      * @link https://wiki.cac.washington.edu/display/pws/Entity+Resource+v2
-     *
-     * @param string $regid UW RegID.
-     *
-     * @return array information about the entity.
      */
-    public function getByRegID($regid)
+    public function getByRegID(string $regid): array
     {
         $regid = $this->validateID($regid, 'regid');
 
@@ -26,12 +22,8 @@ class Entity extends AbstractApi
      * Get the entity by UW NetID.
      *
      * @link https://wiki.cac.washington.edu/display/pws/Entity+Resource+v2
-     *
-     * @param string $netid UW NetID.
-     *
-     * @return array Information about the entity.
      */
-    public function getByNetID($netid)
+    public function getByNetID(string $netid): array
     {
         $netid = $this->validateID($netid, 'netid');
 
@@ -44,10 +36,8 @@ class Entity extends AbstractApi
      * @link https://wiki.cac.washington.edu/display/pws/Entity+Resource+v2
      *
      * @param string $id UW RegID or UW NetID.
-     *
-     * @return array Information about the entity.
      */
-    protected function getByID($id)
+    protected function getByID(string $id): array
     {
         $fragment = "entity/{$id}";
         $path = $this->buildPath($fragment);
@@ -61,23 +51,21 @@ class Entity extends AbstractApi
      *
      * @link https://wiki.cac.washington.edu/pages/viewpage.action?spaceKey=pws&title=Person+Search+v2
      *
-     * @param string $display_name The display name to search for.
-     * @param boolean $only_entities If true, searches only for non-person entities.
-     * @param boolean $is_test_entity If true, searches only for entities that are designated as "test entities".
-     *
-     * @return array List of entities found.
+     * @param string $displayName The display name to search for.
+     * @param bool $onlyEntities If true, searches only for non-person entities.
+     * @param bool $isTestEntity If true, searches only for entities that are designated as "test entities".
      */
-    public function findByName($display_name, $only_entities = true, $is_test_entity = false)
+    public function findByName(string $displayName, bool $onlyEntities = true, bool $isTestEntity = false): array
     {
         $params = [];
-        $params['display_name'] = $display_name;
-        $params['only_entities'] = $only_entities ? 'on' : '';
-        $params['is_test_entity'] = $is_test_entity ? 'on' : '';
+        $params['display_name'] = $displayName;
+        $params['only_entities'] = $onlyEntities ? 'on' : '';
+        $params['is_test_entity'] = $isTestEntity ? 'on' : '';
 
         return $this->findBy($params);
     }
 
-    protected function findBy($params)
+    protected function findBy(array $params): array
     {
         $fragment = "entity";
         $path = $this->buildPath($fragment, $params);
