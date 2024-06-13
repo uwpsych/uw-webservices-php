@@ -2,10 +2,10 @@
 
 namespace UwPsych\UwWebservices\Api;
 
-use UwPsych\UwWebservices\Api\AbstractApi;
-
 class Person extends AbstractApi
 {
+    use PersonApiTrait;
+
     /**
      * Get the person by UW RegID.
      *

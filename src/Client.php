@@ -3,6 +3,7 @@
 namespace UwPsych\UwWebservices;
 
 use GuzzleHttp\Client as GuzzleClient;
+use UwPsych\UwWebservices\Api\Entity;
 use UwPsych\UwWebservices\Api\Person;
 use UwPsych\UwWebservices\Exception\InvalidArgumentException;
 
@@ -24,12 +25,6 @@ use UwPsych\UwWebservices\Exception\InvalidArgumentException;
  */
 class Client
 {
-    /** @var null|string */
-    private $cert = null;
-
-    /** @var null|string */
-    private $ssl_key = null;
-
     /** @var GuzzleHttp\Client */
     private $httpClient;
 
@@ -39,14 +34,12 @@ class Client
      * @param string $cert Your authorized client certificate file.
      * @param string $ssl_key Your associated private key file.
      */
-    public function __construct(string $cert, string $ssl_key, $httpClient = null)
+    public function __construct(string $baseUri, string $cert, string $ssl_key, $httpClient = null)
     {
-        $this->cert = $cert;
-        $this->ssl_key = $ssl_key;
         $this->httpClient =
             $httpClient ??
             new GuzzleClient([
-                'base_uri' => 'https://ws.admin.washington.edu',
+                'base_uri' => $baseUri,
                 'timeout' => 5.0,
                 'cert' => $cert,
                 'ssl_key' => $ssl_key,
