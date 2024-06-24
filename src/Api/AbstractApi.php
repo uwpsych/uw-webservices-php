@@ -19,7 +19,7 @@ abstract class AbstractApi
         $this->setup($options, $defaultParams);
     }
 
-    protected function get(string $path = '/'): mixed
+    protected function get(string $path = ''): mixed
     {
         $response = $this->client->getHttpClient()->get($path);
 
@@ -53,6 +53,6 @@ abstract class AbstractApi
         $version = $this->options['version'];
         $format = $this->options['format'];
 
-        return '/' . $version . '/' . $fragment . $format . $queryComponent;
+        return $version . '/' . $fragment . $format . $queryComponent;
     }
 }
