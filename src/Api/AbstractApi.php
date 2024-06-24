@@ -53,6 +53,6 @@ abstract class AbstractApi
         $version = $this->options['version'];
         $format = $this->options['format'];
 
-        return $version . '/' . $fragment . $format . $queryComponent;
+        return 'identity/' . $version . '/' . $fragment . $format . $queryComponent;
     }
 }
